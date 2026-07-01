@@ -1,0 +1,6 @@
+[submodule "portal"]
+	path = portal
+	url = git@github.com:KyleBing/portal.git
+[submodule "diary-vue"]
+	path = diary-vue
+	url = git@github.com:KyleBing/diary.git

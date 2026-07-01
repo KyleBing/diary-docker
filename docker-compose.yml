@@ -1,0 +1,58 @@
+# 标题日记 Docker Compose（不影响本地 dev 模式，需手动 docker compose up 才会启动）
+# 启动：在 diary-docker 目录执行 docker compose up -d --build
+# 访问：http://localhost:8080/diary/  初始化：http://localhost:8080/portal/init
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: diary-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:-rootpassword}
+      MYSQL_DATABASE: diary
+      TZ: Asia/Shanghai
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h 127.0.0.1 -uroot -p$$MYSQL_ROOT_PASSWORD || exit 1"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+      start_period: 30s
+
+  portal:
+    image: ${DOCKERHUB_USER:-kylebing}/diary-portal:${DIARY_VERSION:-9.5.4}
+    build:
+      context: ./portal
+      args:
+        DB_HOST: mysql
+        DB_USER: root
+        DB_PASSWORD: ${DB_PASSWORD:-rootpassword}
+        DB_PORT: 3306
+    container_name: diary-portal
+    restart: unless-stopped
+    depends_on:
+      mysql:
+        condition: service_healthy
+    volumes:
+      - portal_state:/app/state
+      - ./docker/portal-entrypoint.sh:/portal-entrypoint.sh:ro
+    entrypoint: ["/bin/sh", "/portal-entrypoint.sh"]
+    expose:
+      - "3000"
+
+  web:
+    image: ${DOCKERHUB_USER:-kylebing}/diary-web:${DIARY_VERSION:-9.5.4}
+    build:
+      context: .
+      dockerfile: docker/web.Dockerfile
+    container_name: diary-web
+    restart: unless-stopped
+    ports:
+      - "${WEB_PORT:-8080}:80"
+    depends_on:
+      - portal
+
+volumes:
+  mysql_data:
+  portal_state:
