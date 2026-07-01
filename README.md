@@ -2,6 +2,15 @@
 
 一键部署 [标题日记](https://github.com/KyleBing/diary) 前端 + [portal](https://github.com/KyleBing/portal) 后端 + MySQL。
 
+
+<img width="2577" height="1321" alt="Docker Images" src="https://github.com/user-attachments/assets/d750603b-9f6c-4685-81a6-2cd866bb22d8" />
+
+<img width="2778" height="175" alt="Docker Container" src="https://github.com/user-attachments/assets/a5da3656-2b9f-4f10-a7e0-a4c6b193546e" />
+
+
+
+
+
 ```
 diary-docker/
 ├── docker-compose.yml    # 编排配置
