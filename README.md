@@ -11,12 +11,12 @@ diary-docker/
 └── diary-vue/            # 前端子模块
 ```
 
-## 前置要求
+## 一、前置要求
 
 - [Docker](https://docs.docker.com/get-docker/)（含 Docker Compose）
 - Git（**源码构建**时需要，用于克隆子模块）
 
-## 两种方式
+## 二、两种方式
 
 | 方式 | 适合谁 | 是否需要子模块 |
 |------|--------|----------------|
@@ -25,7 +25,7 @@ diary-docker/
 
 ---
 
-## 方式一：Docker Hub 镜像（推荐分享）
+## 三、方式一：Docker Hub 镜像（推荐分享）
 
 无需克隆子模块，只需本仓库的 compose 和 `docker/` 配置。
 
@@ -49,12 +49,15 @@ docker compose -f docker-compose.hub.yml up -d
 DIARY_VERSION=9.5.4 docker compose -f docker-compose.hub.yml up -d
 ```
 
-### 3. 初始化与访问
+### 3. 访问
 
 ```
-http://localhost:8080/portal/init   # 首次初始化
-http://localhost:8080/diary/        # 使用
+http://localhost:8080/diary/
 ```
+
+首次访问时，前端会引导完成初始化。  
+默认填写的内容就能直接使用，直接下一步就行。  
+完成初始化。
 
 ### Docker Hub 镜像
 
@@ -67,7 +70,7 @@ http://localhost:8080/diary/        # 使用
 
 ---
 
-## 方式二：本地源码构建
+## 四、方式二：本地源码构建
 
 ### 1. 克隆仓库（含子模块）
 
@@ -90,17 +93,7 @@ docker compose up -d --build
 
 首次启动会拉取镜像并编译前后端，可能需要几分钟。
 
-### 3. 初始化数据库
-
-浏览器访问（仅需执行一次）：
-
-```
-http://localhost:8080/portal/init
-```
-
-看到「数据库初始化成功」即可。
-
-### 4. 使用
+### 3. 访问
 
 ```
 http://localhost:8080/diary/
@@ -108,7 +101,10 @@ http://localhost:8080/diary/
 
 > 默认端口为 **8080**，不是 80。访问时请带上 `:8080`。
 
-## 环境变量
+默认填写的内容就能直接使用，直接下一步就行。  
+完成初始化。
+
+## 五、环境变量
 
 复制示例文件并按需修改：
 
@@ -125,7 +121,7 @@ cp .env.example .env
 
 若希望使用 `http://localhost/diary/`（不带端口号），可设置 `WEB_PORT=80`。Windows 上 80 端口可能需要管理员权限，且易与本机其他 Web 服务冲突。
 
-## 常用命令
+## 六、常用命令
 
 ```bash
 # 查看状态
@@ -149,7 +145,7 @@ docker compose up -d --build web
 
 数据库备份与恢复见 [README_backup.md](./README_backup.md)。
 
-## 更新子模块
+## 七、更新子模块
 
 ### 更新 portal（后端）
 
@@ -171,7 +167,7 @@ docker compose up -d --build web
 git pull --recurse-submodules
 ```
 
-## 服务说明
+## 八、服务说明
 
 | 容器 | 说明 | 对外端口 |
 |------|------|----------|
@@ -179,7 +175,7 @@ git pull --recurse-submodules
 | `diary-portal` | 后端 API | 无（经 Nginx 反代） |
 | `diary-web` | Nginx + 前端静态资源 | `WEB_PORT`（默认 8080） |
 
-## 发布镜像到 Docker Hub（维护者）
+## 九、发布镜像到 Docker Hub（维护者）
 
 发新版本时，先更新根目录 `VERSION` 文件，再构建推送：
 
@@ -209,7 +205,7 @@ docker compose build
 docker compose push
 ```
 
-## 局域网访问
+## 十、局域网访问
 
 同一局域网内的其他设备可通过本机 IP 访问：
 
@@ -219,7 +215,7 @@ http://<你的IP>:8080/diary/
 
 注意防火墙需放行对应端口。仅建议在可信局域网内使用。
 
-## 子模块仓库
+## 十一、子模块仓库
 
 - 前端：[KyleBing/diary](https://github.com/KyleBing/diary) → `diary-vue/`
 - 后端：[KyleBing/portal](https://github.com/KyleBing/portal) → `portal/`
