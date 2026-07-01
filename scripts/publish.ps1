@@ -1,4 +1,4 @@
-# 构建并推送 portal、web 镜像到 Docker Hub
+﻿# 构建并推送 portal、web 镜像到 Docker Hub
 # 用法：.\scripts\publish.ps1 [-Version 9.5.4] [-User kylebing] [-Latest]
 
 param(
@@ -39,5 +39,6 @@ if ($Latest) {
     Write-Host ">>> 已推送 latest 标签"
 }
 
-Write-Host "完成。他人可使用："
-Write-Host "  DIARY_VERSION=$Version docker compose -f docker-compose.hub.yml up -d"
+Write-Host "完成。他人可使用:"
+$hubCmd = "DIARY_VERSION=$Version docker compose -f docker-compose.hub.yml up -d"
+Write-Host "  $hubCmd"

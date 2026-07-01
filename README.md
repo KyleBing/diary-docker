@@ -5,6 +5,7 @@
 ```
 diary-docker/
 ├── docker-compose.yml    # 编排配置
+├── README_backup.md      # 数据库备份与恢复
 ├── docker/               # Nginx、前端构建等 Docker 文件
 ├── portal/               # 后端子模块
 └── diary-vue/            # 前端子模块
@@ -145,6 +146,8 @@ docker compose up -d --build portal
 # 前端更新后重建
 docker compose up -d --build web
 ```
+
+数据库备份与恢复见 [README_backup.md](./README_backup.md)。
 
 ## 更新子模块
 
