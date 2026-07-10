@@ -1,5 +1,5 @@
 ﻿# 构建并推送 portal、web 镜像到 Docker Hub
-# 用法：.\scripts\publish.ps1 [-Version 9.5.4] [-User kylebing] [-Latest]
+# 用法：.\scripts\publish.ps1 [-Version 9.5.5] [-User kylebing] [-Latest]
 
 param(
     [string]$Version = (Get-Content "$PSScriptRoot\..\VERSION" -Raw).Trim(),

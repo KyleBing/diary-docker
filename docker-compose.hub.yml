@@ -21,7 +21,7 @@ services:
       start_period: 30s
 
   portal:
-    image: ${DOCKERHUB_USER:-kylebing}/diary-portal:${DIARY_VERSION:-9.5.4}
+    image: ${DOCKERHUB_USER:-kylebing}/diary-portal:${DIARY_VERSION:-9.5.5}
     container_name: diary-portal
     restart: unless-stopped
     depends_on:
@@ -35,7 +35,7 @@ services:
       - "3000"
 
   web:
-    image: ${DOCKERHUB_USER:-kylebing}/diary-web:${DIARY_VERSION:-9.5.4}
+    image: ${DOCKERHUB_USER:-kylebing}/diary-web:${DIARY_VERSION:-9.5.5}
     container_name: diary-web
     restart: unless-stopped
     ports:

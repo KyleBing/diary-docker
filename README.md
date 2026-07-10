@@ -48,14 +48,14 @@ cd diary-docker
 ### 2. 启动指定版本
 
 ```bash
-# 默认拉取 9.5.4（见 VERSION 文件）
+# 默认拉取 9.5.5（见 VERSION 文件）
 docker compose -f docker-compose.hub.yml up -d
 ```
 
 指定其他版本：
 
 ```bash
-DIARY_VERSION=9.5.4 docker compose -f docker-compose.hub.yml up -d
+DIARY_VERSION=9.5.5 docker compose -f docker-compose.hub.yml up -d
 ```
 
 ### 3. 访问
@@ -72,8 +72,8 @@ http://localhost:8080/diary/
 
 | 镜像 | 说明 |
 |------|------|
-| `kylebing/diary-portal:9.5.4` | 后端 |
-| `kylebing/diary-web:9.5.4` | 前端 + Nginx |
+| `kylebing/diary-portal:9.5.5` | 后端 |
+| `kylebing/diary-web:9.5.5` | 前端 + Nginx |
 
 版本号与仓库根目录 `VERSION` 文件一致。
 
@@ -125,7 +125,7 @@ cp .env.example .env
 |------|--------|------|
 | `WEB_PORT` | `8080` | 对外访问端口（宿主机） |
 | `DB_PASSWORD` | `rootpassword` | MySQL root 密码 |
-| `DIARY_VERSION` | `9.5.4` | Docker Hub 镜像版本标签 |
+| `DIARY_VERSION` | `9.5.5` | Docker Hub 镜像版本标签 |
 | `DOCKERHUB_USER` | `kylebing` | Docker Hub 用户名 |
 
 若希望使用 `http://localhost/diary/`（不带端口号），可设置 `WEB_PORT=80`。Windows 上 80 端口可能需要管理员权限，且易与本机其他 Web 服务冲突。
@@ -197,7 +197,7 @@ docker login
 
 # Linux / macOS
 chmod +x scripts/publish.sh
-./scripts/publish.sh 9.5.4 kylebing --latest
+./scripts/publish.sh 9.5.5 kylebing --latest
 ```
 
 脚本会构建并推送：
